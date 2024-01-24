@@ -1,3 +1,101 @@
+-- Deliverable
+-- 1. CREATE TABLE
+DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS MovieCharacters;
+
+
+CREATE TABLE studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studio_NAME TEXT
+);
+
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+studio_id INTEGER,
+movie_title TEXT,
+MPAA_rating TEXT,
+year_released INTEGER,
+character_id INTEGER
+);
+
+CREATE TABLE actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    actor_name TEXT,
+character_id INTEGER
+);
+
+CREATE TABLE MovieCharacters (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_title TEXT,
+    actor_name TEXT,
+    character_name TEXT,
+    movies_id INTEGER
+);
+
+-- 2. INSERT DATA
+INSERT INTO studios (
+    studio_name
+) VALUES
+("Warner Bros.");
+
+INSERT INTO actors (
+    actor_name,
+    character_id
+) VALUES
+("Christian Bale", 1),
+("Bruce Wayne", 2),
+("Michael Caine", 3),
+("Katie Holmes", 4),
+("Gary Oldman", 5),
+("Heath Ledger", 6),
+("Aaron Eckhart", 7),
+("Maggie Gyllenhaal", 8),
+("Tom Hardy", 9),
+("Joseph Gordon-Levitt", 10),
+("Anne Hathaway", 11);
+
+INSERT INTO movies (
+    movie_title,
+    year_released,
+    MPAA_rating,
+    studio_id
+) VALUES
+("Batman Begins", 2005, "PG-13", 1),
+("The Dark Knight", 2008, "PG-13", 1),
+("The Dark Knight Rises", 2012, "PG-13", 1);
+
+INSERT INTO MovieCharacters (
+    movie_title,
+    actor_name,
+    character_name
+    movies_id
+) VALUES
+("Batman Begins", "Christian Bale", "Bruce Wayne"),
+("Batman Begins", "Michael Caine", "Alfred"),
+("Batman Begins", "Liam Neeson", "Ra's Al Ghul"),
+("Batman Begins", "Katie Holmes", "Rachel Dawes"),
+("Batman Begins", "Gary Oldman", "Commissioner Gordon"),
+("The Dark Knight", "Christian Bale", "Bruce Wayne"),
+("The Dark Knight", "Heath Ledger", "Joker"),
+("The Dark Knight", "Aaron Eckhart", "Harvey Dent"),
+("The Dark Knight", "Michael Caine", "Alfred"),
+("The Dark Knight", "Maggie Gyllenhaal", "RAchel Dawes"),
+("The Dark Knight Rises", "Christian Bale", "Bruce Wayne"),
+("The Dark Knight Rises", "Gary Oldman", "Commissioner Gordon"),
+("The Dark Knight Rises", "Tom Hardy", "Bane"),
+("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake"),
+("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle");
+
+-- SELECT STATEMENT 1: MOVIE
+SELECT movies.movie_title, movies.year_released, movies.MPAA_rating, studios.studio_name
+FROM movies INNER JOIN studios on studios.id = 1;
+
+-- SELECT STATEMENT 2: TOP CAST
+SELECT MovieCharacters.movie_title, MovieCharacters.actor_name, MovieCharacters.character_name 
+FROM MovieCharacters INNER JOIN movies on movies.movies_id = MovieCharacters.movies_id
+
 -- In this assignment, you'll be building the domain model, database 
 -- structure, and data for "KMDB" (the Kellogg Movie Database).
 -- The end product will be a report that prints the movies and the 
@@ -53,6 +151,11 @@
 -- - Follow best practices for table and column names
 -- - Use correct data column types (i.e. TEXT/INTEGER)
 -- - Use of the `model_id` naming convention for foreign key columns
+-- Drop tables if they exist to start with a clean slate
+-- Studios Table
+-- Movies Table
+-- Actors Table
+-- MovieCharacters Table (previously Cast)
 -- 3. Insertion of data (INSERT statements) - 4 points
 -- - Insert data into all the tables you've created
 -- - It actually works, i.e. proper INSERT syntax
@@ -61,6 +164,7 @@
 --   sample output below - 1 for movies and 1 for cast. You will need
 --   to read data from multiple tables in each `SELECT` statement.
 --   Formatting does not matter.
+
 
 -- Submission
 -- 
